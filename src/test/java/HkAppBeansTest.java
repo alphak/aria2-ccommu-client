@@ -139,12 +139,14 @@ public class HkAppBeansTest {
     }
 
     @Test
-    public void cachingDataFromFileDbSearchTest(){
+    public void cachingDataFromFileDbSearchTest() throws IOException {
         FileItem it = new FileItem(false, "cawd031-5.mp4", "cawd031-5", 669, null, ".mp4");
         if(cachingDataFromFile.searchDb(it)){
             logger.debug("founded");
         }else{
             logger.debug("not exists");
         }
+
+        cachingDataFromFile.writeToFile("F:/test/test.lst");
     }
 }

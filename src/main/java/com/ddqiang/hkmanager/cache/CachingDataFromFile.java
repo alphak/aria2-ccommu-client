@@ -8,8 +8,10 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -86,7 +88,21 @@ public class CachingDataFromFile extends AbstractCacheData{
                 return true;
             }
         }
+        file_item_database.add(item);
         return false;
+    }
+
+    public boolean writeToFile(String filePath) throws IOException {
+        BufferedWriter bw = new BufferedWriter(new FileWriter(filePath));
+        for (FileItem it:
+                file_item_database) {
+            bw.write(it.getFileName()+"#"+it.getFileSize());
+            bw.newLine();
+            bw.flush();
+        }
+
+        bw.close();
+        return true;
     }
 
     private List<String> initList(String filepath) {

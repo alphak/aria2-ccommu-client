@@ -3,6 +3,8 @@ package com.ddqiang.hkmanager.tasks;
 
 import com.ddqiang.hkmanager.btparser.BTFileParser;
 import com.ddqiang.hkmanager.cache.AbstractCacheData;
+import com.ddqiang.hkmanager.cache.CachingDataFromFile;
+import com.ddqiang.hkmanager.cache.FileItem;
 import com.ddqiang.hkmanager.elem.AbstractElem;
 import com.ddqiang.hkmanager.elem.BlockingQueueElem;
 import com.ddqiang.hkmanager.filterstrategy.FilterStrategy;
@@ -116,14 +118,14 @@ public class DirectoryWatcherTask implements Runnable{
 
         //check bt files every 2 minites
         File[] fileLst = bfpath.listFiles();
-        boolean shouldMove = true;
+//        boolean shouldMove = true;
         boolean willBase64 = true;
         while (true){
             fileLst = bfpath.listFiles();
             if(fileLst != null && fileLst.length> 0){
                 for (File f: fileLst) {
                     if(f.isFile() && f.getName().toLowerCase().endsWith(".torrent")){
-                        shouldMove = true;
+//                        shouldMove = true;
                         willBase64 = true;
                         logger.debug(f.getAbsolutePath());
                         try {
@@ -144,9 +146,16 @@ public class DirectoryWatcherTask implements Runnable{
                                     continue;
                                 }
 
-                                if(filterStrategy.isInContained(name, cacheData.getExistsFileNames())){
-                                    willBase64 = false;
-                                    break;
+//                                if(filterStrategy.isInContained(name, cacheData.getExistsFileNames())){
+//                                    willBase64 = false;
+//                                    break;
+//                                }
+                                if(cacheData instanceof CachingDataFromFile){
+                                    CachingDataFromFile cachingDataFromFile = (CachingDataFromFile) cacheData;
+                                    if(cachingDataFromFile.searchDb(new FileItem(tf))) {
+                                        willBase64 = false;
+                                        break;
+                                    }
                                 }
                             }
                             if(willBase64) {
