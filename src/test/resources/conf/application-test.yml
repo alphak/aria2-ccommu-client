@@ -1,0 +1,27 @@
+spring:
+    profiles: test
+
+aria2:
+    app:
+        id: 6800
+    jsonrpc:
+        version: 2.0
+    rpc:
+        token: 112358
+
+commuclient:
+    websocket:
+        port: 6800
+        url: ws://192.168.179.149:6800/jsonrpc
+        token: 112358
+
+sentinel:
+    btfiles:
+        watchpath: F:/test
+        bakpath: F:/test/bak
+
+filtercache:
+    exclude:
+        extsfilepath: F:/test/fexts.lst
+        namesfilepath: F:/test/fkw.lst
+        filenamedb: F:/test/fileslist.lst

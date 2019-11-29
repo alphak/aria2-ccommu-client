@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.ddqiang.hkmanager</groupId>
+  <artifactId>aria2c-commu-client</artifactId>
+  <version>1.0-SNAPSHOT</version>
+
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.2.1.RELEASE</version>
+    <relativePath/> <!-- lookup parent from repository -->
+  </parent>
+
+  <properties>
+    <spring-boot.version>2.2.1.RELEASE</spring-boot.version>
+    <jdk.version>1.8</jdk.version>
+    <ttorrent-core.version>1.5</ttorrent-core.version>
+    <netty.version>4.1.43.Final</netty.version>
+    <fastjson.version>1.2.62</fastjson.version>
+  </properties>
+
+<!--  <build>-->
+<!--    <plugins>-->
+<!--      <plugin>-->
+<!--        <groupId>org.apache.maven.plugins</groupId>-->
+<!--        <artifactId>maven-compiler-plugin</artifactId>-->
+<!--        <configuration>-->
+<!--          <source>${jdk.version}</source>-->
+<!--          <target>${jdk.version}</target>-->
+<!--          <compilerVersion>${jdk.version}</compilerVersion>-->
+<!--        </configuration>-->
+<!--      </plugin>-->
+<!--      <plugin>-->
+<!--        <groupId>org.apache.maven.plugins</groupId>-->
+<!--        <artifactId>maven-jar-plugin</artifactId>-->
+<!--        <configuration>-->
+<!--          <archive>-->
+<!--            <addMavenDescriptor>false</addMavenDescriptor>-->
+<!--            <manifest>-->
+<!--              <addDefaultImplementationEntries>true</addDefaultImplementationEntries>-->
+<!--            </manifest>-->
+<!--          </archive>-->
+<!--        </configuration>-->
+<!--      </plugin>-->
+<!--      <plugin>-->
+<!--        <artifactId>maven-assembly-plugin</artifactId>-->
+<!--        <version>2.6</version>-->
+<!--        <configuration>-->
+<!--          <descriptor>src/main/assembly/zip.xml</descriptor>-->
+<!--        </configuration>-->
+<!--        <executions>-->
+<!--          <execution>-->
+<!--            <id>make-zip</id>-->
+<!--            <phase>package</phase>-->
+<!--            <goals>-->
+<!--              <goal>single</goal>-->
+<!--            </goals>-->
+<!--          </execution>-->
+<!--        </executions>-->
+<!--      </plugin>-->
+<!--      <plugin>-->
+<!--        <groupId>org.springframework.boot</groupId>-->
+<!--        <artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--      </plugin>-->
+<!--    </plugins>-->
+<!--  </build>-->
+
+
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+<!--      <exclusions>-->
+<!--        <exclusion>-->
+<!--          <groupId>org.junit.vintage</groupId>-->
+<!--          <artifactId>junit-vintage-engine</artifactId>-->
+<!--        </exclusion>-->
+<!--      </exclusions>-->
+    </dependency>
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>fastjson</artifactId>
+      <version>${fastjson.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>jcl-over-slf4j</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>javax.annotation</groupId>
+      <artifactId>javax.annotation-api</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>io.netty</groupId>
+      <artifactId>netty-all</artifactId>
+      <version>${netty.version}</version>
+    </dependency>
+
+<!--    <dependency>-->
+<!--      <groupId>com.turn</groupId>-->
+<!--      <artifactId>ttorrent-core</artifactId>-->
+<!--      <version>${ttorrent-core.version}</version>-->
+<!--    </dependency>-->
+<!--    <dependency>-->
+<!--      <groupId>com.turn</groupId>-->
+<!--      <artifactId>ttorrent-bencoding</artifactId>-->
+<!--      <version>1.3.0-SNAPSHOT</version>-->
+<!--    </dependency>-->
+    <dependency>
+      <groupId>com.turn</groupId>
+      <artifactId>ttorrent-common</artifactId>
+      <version>1.3.0-SNAPSHOT</version>
+    </dependency>
+
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+</project>

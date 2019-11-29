@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <property name="LOG_HOME" value="log"/>
+  <property name="LOG_NAME" value="Aria2Client"/>
+  <property name="ENCODING" value="UTF-8"/>
+  <property name="PATTERN" value="%d %5level [%thread] %logger{26} - %m%n%ex{5}"/>
+  <jmxConfigurator/>
+  <!--
+
+    <appender name="FILE"
+      class="ch.qos.logback.core.rolling.RollingFileAppender">
+      <file>${LOG_HOME}/${LOG_NAME}.log</file>
+      <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+        <fileNamePattern>l${LOG_HOME}/${LOG_NAME}.%i.log.zip
+        </fileNamePattern>
+        <minIndex>1</minIndex>
+        <maxIndex>10</maxIndex>
+      </rollingPolicy>
+
+      <triggeringPolicy
+        class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+        <maxFileSize>50MB</maxFileSize>
+      </triggeringPolicy>
+      <encoder>
+        <pattern>${PATTERN}
+        </pattern>
+        <charset>${ENCODING}</charset>
+      </encoder>
+    </appender>
+  -->
+  <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${LOG_HOME}/${LOG_NAME}.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>
+        ${LOG_HOME}/hislog/${LOG_NAME}.%d{yyyy-MM-dd}.%i.log.zip
+      </fileNamePattern>
+      <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+        <maxFileSize>500MB</maxFileSize>
+      </timeBasedFileNamingAndTriggeringPolicy>
+      <maxHistory>7</maxHistory>
+    </rollingPolicy>
+    <encoder>
+      <pattern>${PATTERN} </pattern>
+      <charset>${ENCODING}</charset>
+    </encoder>
+  </appender>
+  <!--
+
+    <appender name="FILEERR"
+      class="ch.qos.logback.core.rolling.RollingFileAppender">
+      <filter class="ch.qos.logback.classic.filter.LevelFilter">
+        <level>ERROR</level>
+        <onMatch>ACCEPT</onMatch>
+        <onMismatch>DENY</onMismatch>
+      </filter>
+      <file>${LOG_HOME}/${LOG_NAME}.err</file>
+      <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+        <fileNamePattern>l${LOG_HOME}/${LOG_NAME}.%i.err.zip
+        </fileNamePattern>
+        <minIndex>1</minIndex>
+        <maxIndex>10</maxIndex>
+      </rollingPolicy>
+
+      <triggeringPolicy
+        class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+        <maxFileSize>50MB</maxFileSize>
+      </triggeringPolicy>
+      <encoder>
+        <pattern>${PATTERN}
+        </pattern>
+        <charset>${ENCODING}</charset>
+      </encoder>
+    </appender>
+  -->
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>${PATTERN} </pattern>
+      <!--  <charset>${ENCODING}</charset>  -->
+    </encoder>
+  </appender>
+  <logger name="com.ddqiang" level="DEBUG" additivity="false">
+    <appender-ref ref="FILE"/>
+    <appender-ref ref="STDOUT"/>
+  </logger>
+  <root level="DEBUG">
+    <appender-ref ref="FILE"/>
+    <appender-ref ref="STDOUT"/>
+  </root>
+</configuration>
