@@ -24,4 +24,9 @@ filtercache:
     exclude:
         extsfilepath: F:/test/fexts.lst
         namesfilepath: F:/test/fkw.lst
+    exists:
         filenamedb: F:/test/fileslist.lst
+
+filedatabase:
+    path:
+        dbfilepath: F:/test/fileslistextsize.lst

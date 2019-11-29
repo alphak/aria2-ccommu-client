@@ -1,4 +1,5 @@
 import com.ddqiang.hkmanager.cache.CachingDataFromFile;
+import com.ddqiang.hkmanager.cache.FileItem;
 import com.ddqiang.hkmanager.commuclient.CommuClient;
 import com.ddqiang.hkmanager.elem.AbstractElem;
 import com.ddqiang.hkmanager.filterstrategy.DefaultFilterStrategy;
@@ -129,6 +130,21 @@ public class HkAppBeansTest {
         executor.submit(directoryWatcherTask);
         while (true){
             Thread.sleep(120);
+        }
+    }
+
+    @Test
+    public void cachingDataFromFileDbInitTest(){
+        cachingDataFromFile.printDb();
+    }
+
+    @Test
+    public void cachingDataFromFileDbSearchTest(){
+        FileItem it = new FileItem(false, "cawd031-5.mp4", "cawd031-5", 669, null, ".mp4");
+        if(cachingDataFromFile.searchDb(it)){
+            logger.debug("founded");
+        }else{
+            logger.debug("not exists");
         }
     }
 }

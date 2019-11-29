@@ -10,6 +10,7 @@ import com.ddqiang.hkmanager.rpcmsg.ARIA2C_CONSTANT;
 import com.ddqiang.hkmanager.rpcmsg.Aria2AddTorrentMsg;
 import com.ddqiang.hkmanager.rpcmsg.MsgType;
 import com.ddqiang.hkmanager.rpcmsg.RpcMsg;
+import com.ddqiang.hkmanager.utils.Utils;
 import com.turn.ttorrent.common.TorrentFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -61,22 +62,6 @@ public class DirectoryWatcherTask implements Runnable{
 
     @Autowired
     private BlockingQueue<AbstractElem> blockingQueue;
-
-    private String getFileExtention(String filename){
-        if(filename == null || "".equals(filename.trim()))
-            return "";
-        String [] tmp= filename.trim().split("\\\\");
-        String name = tmp[tmp.length-1];
-        return name.substring(name.lastIndexOf("."));
-    }
-
-    private String getFilenameWithOutExt(String filename){
-        if(filename == null || "".equals(filename.trim()))
-            return "";
-        String [] tmp= filename.trim().split("\\\\");
-        String name = tmp[tmp.length-1];
-        return name.substring(0,name.lastIndexOf("."));
-    }
 
     @Override
     public void run() {
@@ -146,9 +131,9 @@ public class DirectoryWatcherTask implements Runnable{
                             for (TorrentFile tf: torrentfiles) {
                                 logger.debug(tf.getRelativePathAsString());
                                 String oriname = tf.getRelativePathAsString().trim();
-                                String name = getFilenameWithOutExt(oriname);
+                                String name = Utils.getFilenameWithOutExt(oriname);
                                 logger.debug("name without extention=[{}]", name);
-                                String ext = getFileExtention(oriname);
+                                String ext = Utils.getFileExtention(oriname);
                                 logger.debug("file extention=[{}]", ext);
 
                                 if(filterStrategy.isInExcludeExts(ext, cacheData.getExcludeExts())){

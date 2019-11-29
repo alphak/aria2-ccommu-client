@@ -1,5 +1,6 @@
 package com.ddqiang.hkmanager.cache;
 
+import com.ddqiang.hkmanager.utils.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,6 +28,11 @@ public class CachingDataFromFile extends AbstractCacheData{
     @Value("${filtercache.exists.filenamedb}")
     private String filenamesdbPath;
 
+    @Value("${filedatabase.path.dbfilepath}")
+    private String dbFilePath;
+
+    private List<FileItem> file_item_database;
+
 
     @PostConstruct
     public void init() {
@@ -36,6 +42,51 @@ public class CachingDataFromFile extends AbstractCacheData{
         setExcludeExts(excludeExtsTmp);
         setExcludeNames(excludeNamesTmp);
         setExistsFileNames(existsFileNamesTmp);
+
+        file_item_database = initFileDatabase(dbFilePath);
+    }
+
+    private List<FileItem> initFileDatabase(String path){
+        List<FileItem> db = new ArrayList<>();
+        List<String> list = initList(path);
+        for (String line:
+             list) {
+            String [] name_size = line.split("#");
+            if(name_size.length == 2){
+                String file_name = Utils.normalize(name_size[0]);
+                long file_size = Long.parseLong(name_size[1]);
+                if(file_size > 20) {
+                    int index = file_name.lastIndexOf(".");
+                    FileItem it = null;
+                    if(index > 0) {
+                        it = new FileItem(true, file_name, file_name.substring(0, file_name.lastIndexOf(".")),
+                                          file_size, null, Utils.getFileExtention(file_name));
+                    }else {
+                        it = new FileItem(true, file_name, file_name, file_size, null, "");
+                    }
+                    db.add(it);
+                }
+            }
+        }
+        return db;
+    }
+
+    public boolean searchDb(FileItem item){
+        if(item == null){
+            return false;
+        }
+        String itemname = item.getFileNameNoExt();
+        for (FileItem it:
+                file_item_database) {
+            if(itemname.contains(it.getFileNameNoExt())){
+                return true;
+            }
+
+            if(it.getFileNameNoExt().contains(itemname)){
+                return true;
+            }
+        }
+        return false;
     }
 
     private List<String> initList(String filepath) {
@@ -44,7 +95,7 @@ public class CachingDataFromFile extends AbstractCacheData{
             BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(filepath)));
             String data = null;
             while ((data = br.readLine()) != null) {
-                list.add(data);
+                list.add(data.toLowerCase());
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -72,6 +123,16 @@ public class CachingDataFromFile extends AbstractCacheData{
             for (String str : list) {
                 logger.debug(str);
             }
+        }
+    }
+
+    public void printDb(){
+        for (FileItem it:
+                file_item_database) {
+            logger.debug("filename with ext===={}", it.getFileName());
+            logger.debug("filename without ext===={}", it.getFileNameNoExt());
+            logger.debug("filename extention===={}", it.getExtention());
+            logger.debug("file size===={}", it.getFileSize());
         }
     }
 }
