@@ -88,7 +88,14 @@ public class CachingDataFromFile extends AbstractCacheData{
                 return true;
             }
         }
-        file_item_database.add(item);
+//        file_item_database.add(item);
+        return false;
+    }
+
+    public boolean addNewFileItem(FileItem item){
+        if(!searchDb(item)){
+            return file_item_database.add(item);
+        }
         return false;
     }
 

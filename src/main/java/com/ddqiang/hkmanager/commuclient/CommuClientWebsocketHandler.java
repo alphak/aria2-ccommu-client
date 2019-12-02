@@ -1,9 +1,12 @@
 package com.ddqiang.hkmanager.commuclient;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.ddqiang.hkmanager.elem.AbstractElem;
 import com.ddqiang.hkmanager.elem.BlockingQueueElem;
 import com.ddqiang.hkmanager.rpcmsg.ARIA2C_CONSTANT;
 import com.ddqiang.hkmanager.rpcmsg.MsgType;
+import com.ddqiang.hkmanager.rpcmsg.ParseRespRpcMsg;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelHandlerContext;
@@ -27,8 +30,6 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.net.URI;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
 
@@ -108,7 +109,7 @@ public class CommuClientWebsocketHandler extends SimpleChannelInboundHandler<Obj
         if (frame instanceof TextWebSocketFrame) {
             TextWebSocketFrame textFrame = (TextWebSocketFrame) frame;
             logger.debug("WebSocket Client received message: " + textFrame.text());
-//            blockingQueue.put(new BlockingQueueElem(MsgType.RESPMSG, textFrame.text()));
+            blockingQueue.put(new BlockingQueueElem(MsgType.RAWRESPMSG, textFrame.text()));
         } else if (frame instanceof PongWebSocketFrame) {
             logger.debug("WebSocket Client received pong");
         } else if (frame instanceof CloseWebSocketFrame) {
@@ -125,4 +126,5 @@ public class CommuClientWebsocketHandler extends SimpleChannelInboundHandler<Obj
         }
         ctx.close();
     }
+
 }

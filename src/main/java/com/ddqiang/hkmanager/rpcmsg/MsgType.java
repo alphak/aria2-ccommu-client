@@ -1,5 +1,5 @@
 package com.ddqiang.hkmanager.rpcmsg;
 
 public enum MsgType {
-    RESPMSG, REQMSG
+    REQMSG, NORMMSG, NOTIMSG, UNKOWNMSG, RAWRESPMSG
 }

@@ -40,4 +40,7 @@ public class ARIA2C_CONSTANT {
     public final static String KEY_VERIFYINTEGRITYPENDING = "verifyIntegrityPending";
 
     public final static String KEY_OPT_PAUSE = "pause";
+
+    public final static String KEY_RESP_RESULT = "result";
+    public final static String KEY_RESP_PARAMS = "params";
 }

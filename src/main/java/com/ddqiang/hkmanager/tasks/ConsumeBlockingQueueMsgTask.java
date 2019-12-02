@@ -32,7 +32,11 @@ public class ConsumeBlockingQueueMsgTask implements Runnable {
                     case REQMSG:
                         commuClient.sendRpcRequest((String) elem.getMsgContent());
                         break;
-                    case RESPMSG:
+                    case RAWRESPMSG:
+
+                        break;
+                    default:
+                        logger.debug("unkown message recieved!!!!");
                         break;
                     }
                 }
