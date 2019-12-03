@@ -2,10 +2,10 @@ package com.ddqiang.hkmanager.rpcmsg;
 
 public class ARIA2C_CONSTANT {
     public final static String KEY_MSGTYPE = "msgType";
-    public final static String KEY_MSGCONT = "msgType";
+//    public final static String KEY_MSGCONT = "msgType";
     public final static String RPCMETHOD_ADDTORRENT = "aria2.addTorrent";
     public final static String KEY_JSONRPC = "jsonrpc";
-    public final static String KEY_APPID = "id";
+    public final static String KEY_CLIENTID = "id";
     public final static String KEY_METHOD = "method";
     public final static String KEY_PARAMS = "params";
     public final static String KEY_GID = "gid";

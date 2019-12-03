@@ -2,7 +2,8 @@ package com.ddqiang.hkmanager.tasks;
 
 import com.ddqiang.hkmanager.commuclient.CommuClient;
 import com.ddqiang.hkmanager.elem.AbstractElem;
-import com.ddqiang.hkmanager.rpcmsg.MsgType;
+import com.ddqiang.hkmanager.rpcmsg.NormalRespRpcMsg;
+import com.ddqiang.hkmanager.rpcmsg.NotificationRpcMsg;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +33,15 @@ public class ConsumeBlockingQueueMsgTask implements Runnable {
                     case REQMSG:
                         commuClient.sendRpcRequest((String) elem.getMsgContent());
                         break;
-                    case RAWRESPMSG:
-
+                    case NORMMSG:
+                        NormalRespRpcMsg norm = (NormalRespRpcMsg)elem.getMsgContent();
+                        logger.info("client={} recv jsonrpc={} message from server with result={}",
+                                    norm.getClientId(), norm.getJsonrpc(), norm.getResult().toString());
+                        break;
+                    case NOTIMSG:
+                        NotificationRpcMsg noti = (NotificationRpcMsg)elem.getMsgContent();
+                        logger.info("recv jsonrpc={} notification from server of type={} with parameters={}",
+                                    noti.getJsonrpc(), noti.getRpcMethod(), noti.getParams().toString());
                         break;
                     default:
                         logger.debug("unkown message recieved!!!!");

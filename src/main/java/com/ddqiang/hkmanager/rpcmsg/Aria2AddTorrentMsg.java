@@ -52,7 +52,7 @@ public class Aria2AddTorrentMsg extends AbstractRpcMsg{
 
     private void fillRequestHeader(Map<String, Object> map){
         map.put(ARIA2C_CONSTANT.KEY_JSONRPC, getJsonrpcVer());
-        map.put(ARIA2C_CONSTANT.KEY_APPID, getAppId());
+        map.put(ARIA2C_CONSTANT.KEY_CLIENTID, getAppId());
         map.put(ARIA2C_CONSTANT.KEY_METHOD, ARIA2RPCMETHOD);
     }
 

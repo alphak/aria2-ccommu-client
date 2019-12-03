@@ -1,5 +1,5 @@
 package com.ddqiang.hkmanager.rpcmsg;
 
 public interface ParseRespRpcMsg {
-    public MsgType getRespRpcMsgType(Object msg);
+    public AbstractRespRpcMsg parseToRespObj(MsgType type, Object msg);
 }

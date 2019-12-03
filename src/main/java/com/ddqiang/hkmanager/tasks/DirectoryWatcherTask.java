@@ -8,7 +8,6 @@ import com.ddqiang.hkmanager.cache.FileItem;
 import com.ddqiang.hkmanager.elem.AbstractElem;
 import com.ddqiang.hkmanager.elem.BlockingQueueElem;
 import com.ddqiang.hkmanager.filterstrategy.FilterStrategy;
-import com.ddqiang.hkmanager.rpcmsg.ARIA2C_CONSTANT;
 import com.ddqiang.hkmanager.rpcmsg.Aria2AddTorrentMsg;
 import com.ddqiang.hkmanager.rpcmsg.MsgType;
 import com.ddqiang.hkmanager.rpcmsg.RpcMsg;
@@ -22,9 +21,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
